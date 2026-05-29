@@ -31,12 +31,40 @@ npm run dev
 
 Aplikacja domyślnie startuje pod adresem `http://localhost:5173`.
 
-Produkcja:
+Produkcja lokalnie:
 
 ```bash
 npm run build
 npm run preview
 ```
+
+## Wdrożenie na Vercel
+
+Projekt jest gotowy pod [Vercel](https://vercel.com) (statyczna aplikacja Vite, katalog `dist`).
+
+### Przez panel (Git)
+
+1. Wypchnij repozytorium na GitHub / GitLab / Bitbucket.
+2. W [vercel.com/new](https://vercel.com/new) zaimportuj repozytorium.
+3. Vercel wykryje **Vite** — zostaw domyślne ustawienia (build: `npm run build`, output: `dist`).
+4. Kliknij **Deploy**.
+
+Plik `vercel.json` ustawia framework i przekierowania SPA (odświeżenie strony nie zwraca 404).
+
+### Przez CLI
+
+```bash
+npm i -g vercel
+vercel
+```
+
+Pierwsze uruchomienie przeprowadzi konfigurację projektu; `vercel --prod` wdroży na produkcję.
+
+### Uwagi
+
+- **Skrypt Python** (`stored_xss_poc.py`) nie działa na Vercel — uruchamiaj go lokalnie wobec docelowego API.
+- Dane Stored XSS są w **localStorage przeglądarki** użytkownika (nie na serwerze Vercel).
+- Nie dodawaj restrykcyjnego CSP w nagłówkach Vercel — lab celowo testuje wykonanie skryptów w przeglądarce.
 
 ## Przykład użycia skryptu Python
 
